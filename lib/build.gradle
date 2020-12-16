@@ -1,0 +1,42 @@
+apply plugin: 'groovy'
+//apply plugin: 'com.johnsonkilly.plugin'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //implementation "com.android.tools.build:gradle:3.5.2"
+    implementation gradleApi()
+    implementation localGroovy()
+}
+
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+sourceSets {
+    main {
+        groovy {
+            srcDir 'src/main/groovy'
+        }
+
+        java {
+            srcDir 'src/main/java'
+        }
+    }
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
+
+
+
+apply plugin: 'maven'
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: uri('../repository'))
+        pom.groupId = "com.johnsonkilly"
+        pom.artifactId = "demoplugin"
+        pom.version = "1.0.1"
+    }
+
+}

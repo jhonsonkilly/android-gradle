@@ -1,2 +1,4 @@
+include ':lib'
 include ':app'
 rootProject.name = "android-gradle"
+println("gradle name: " + gradle.class.name)

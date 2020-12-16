@@ -1,15 +1,17 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.johnsonkilly.plugin'
+println("Root build.gradle: " + this)
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
         applicationId "com.xhb.component.android_gradle"
         minSdkVersion 16
-        targetSdkVersion 30
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
@@ -24,6 +26,22 @@ android {
     }
 }
 
+project.task("testA").dependsOn("clean").doLast {
+    print("cleaned")
+}
+task testB {
+    dependsOn("assembleDebug")
+    doLast {
+        println "assembleDebuged"
+    }
+}
+//def map = ["type": Copy.class]
+project.task("type": Copy.class,"copyImage3") {
+    from('build/outputs/apk')
+    into('build/outputs/')
+}
+
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -33,5 +51,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    // compileOnly "com.android.tools.build:gradle:3.5.2"
 
 }
