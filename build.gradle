@@ -3,15 +3,18 @@ println("Root build.gradle: " + project)
 buildscript {
     ext.kotlin_version = "1.4.10"
     repositories {
-        maven {
+       /* maven {
             url uri('./repository')
-        }
+        }*/
+        maven { url "https://jitpack.io" }
         google()
         jcenter()
 
+
     }
     dependencies {
-        classpath 'com.johnsonkilly:demoplugin:1.0.1'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        //classpath 'com.johnsonkilly:demoplugin:1.0.1'
         classpath "com.android.tools.build:gradle:3.5.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
